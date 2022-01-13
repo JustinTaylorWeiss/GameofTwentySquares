@@ -37,7 +37,6 @@ const MoveLog = ({}) => {
     const [gameContextState, gameDispatch] = React.useContext(GameContext);
 
     return <MoveLogWrap>
-
     </MoveLogWrap>
 };
 

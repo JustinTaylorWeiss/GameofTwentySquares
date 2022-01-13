@@ -188,6 +188,14 @@ const advanceTurn = (state, stoneID) => {
     return state
 }
 
+const addToChatLog = (state, moveToLog) => ({
+    ...state,
+    gameState: {
+        ...state.gameState,
+        chatLog: [...state.gameState.chatLog, moveToLog],
+    }
+})
+
 const moveStoneToLandingCoords = (state, stoneID) => {
     const landingCoords = calculateLandingCoords(state, stoneID)
     const [x, y] = landingCoords
@@ -209,6 +217,8 @@ export const gameReducer = (state, action) => {
         return resetRollResult(state);
     case "moveStone":
         return moveStoneWrap(state, action.parameters.stoneID);
+    case "logMove":
+        return addToChatLog(state, action.paraemeters.moveToLog);
     case "resetState":
         return defaultGameState;
     default:

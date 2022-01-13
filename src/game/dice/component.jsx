@@ -52,7 +52,7 @@ const RollText = styled.div`
 export const Dice = ({}) => {
 
     const [gameContextState, gameDispatch] = React.useContext(GameContext);
-
+    
     return (
         <DiceRow>
             {

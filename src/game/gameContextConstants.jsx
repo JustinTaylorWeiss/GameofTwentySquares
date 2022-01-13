@@ -36,6 +36,7 @@ export const whiteStoneIDs = [
         moveMessage: '',
         rollResult: [false, false, false, false],
         rolled: false,
+        chatLog: [],
     },
     boardState: [
       [

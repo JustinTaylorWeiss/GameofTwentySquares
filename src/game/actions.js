@@ -11,6 +11,13 @@ export const resetRolled = () => ({
     parameters: {},
 })
 
+export const logMove = (moveToLog) => ({
+    type: "logMove",
+    parameters: {
+        moveToLog: moveToLog,
+    },
+})
+
 export const resetState = () => ({
     type: "resetState",
     parameters: {},
