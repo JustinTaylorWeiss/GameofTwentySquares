@@ -198,7 +198,7 @@ const advanceTurn = (state, stoneID) => {
                 }
         }
     }
-    return state
+    return state;
 }
 
 const addToMoveLog = (state, moveToLogArr) => ({

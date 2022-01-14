@@ -68,18 +68,18 @@ export const Line = styled.div`
     border-bottom: solid 2px #7851A9;
 `;
 
-export const Log = ({}) => {
+export const Log = ({updateWindowState}) => {
 
-  const [gameContextState, gameDispatch] = React.useContext(GameContext);
+  const [gameContextState, _] = React.useContext(GameContext);
 
   return <LogWrap>
       <TurnMoveTracker color={gameContextState.gameState.activePlayer === "W" ? "#FFFFFF" : "#000000"}>
           <IconWrap>
-              <HelpIcon/>
+              <HelpIcon onClick={() => updateWindowState("Info")}/>
           </IconWrap>
               Turn {gameContextState.gameState.turnNumber}
           <IconWrap>
-              <SettingsIcon/>
+              <SettingsIcon onClick={() => updateWindowState("Settings")}/>
           </IconWrap>
       </TurnMoveTracker>
           <MovesWrap>
