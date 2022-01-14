@@ -31,29 +31,9 @@ export const Game = ({}) => {
     const [gameContextState, _] = innerContext;
 
     return <>
-        <AbsoluteAccesories/>
+        {console.log(gameContextState)}
         <GameContext.Provider value={innerContext}>
-            <TopRightTextWrapper>
-                <ContainerText>
-                    {
-                        gameContextState.gameState.activePlayer === 'W'
-                        ? 'White to Move'
-                        : 'Black to Move'
-                    }
-                </ContainerText>
-                <ContainerText>
-                    Turn {gameContextState.gameState.turnNumber}
-                </ContainerText>
-                <ContainerText>
-                    {
-                        gameContextState.gameState.moveMessage !== ""
-                            ? " " + gameContextState.gameState.moveMessage + " For " + (gameContextState.gameState.activePlayer !== "W"
-                                ? "White."
-                                : "Black.")
-                            : ""
-                    }
-                </ContainerText>
-            </TopRightTextWrapper>
+            <AbsoluteAccesories/>
             <Dice/>
             <Board/>
         </GameContext.Provider>

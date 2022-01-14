@@ -4,6 +4,7 @@ import * as uiStyles from '../../global/styles';
 import { Link } from 'react-router-dom';
 import styled, { css } from "styled-components";
 import { GameContext, getTileStonesWithCoords, getTileModifierWithCoords, validateMove } from '../gameContext';
+import { rowLetterMap } from '../gameContextConstants';
 import * as Actions from '../actions'
 
 
@@ -12,7 +13,40 @@ const GameBoardWrapper = styled.div`
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1vw 1vw 0 0;
 `;
+
+const GameBoardCornerDot = styled.div`
+  width: 2vw;
+  height: 2vw;
+  margin: 10px;
+`
+
+const GameBoardColumnLabel = styled.div`
+  width: 6vw;
+  height: 2vw;
+  font-size: 1.6vw;
+  margin: 10px;
+  color: white;
+  text-align: center;
+`
+
+const GameBoardRowLabel = styled.div`
+  width: 2vw;
+  height: 6vw;
+  font-size: 1.6vw;
+  margin: 10px;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 const GameBoardRow = styled.div`
   position: relative;
@@ -84,6 +118,7 @@ const GameStone = styled(uiComponents.Circle)`
     }
 `;
 
+
 export const Board = ({}) => {
 
     const [gameContextState, gameDispatch] = React.useContext(GameContext);
@@ -91,6 +126,12 @@ export const Board = ({}) => {
     return <>
         <GameBoardWrapper>
           <GameBoardRow>
+            <GameBoardColumn key={`Labelcolumn`}>
+              <GameBoardRowLabel>3</GameBoardRowLabel>
+              <GameBoardRowLabel>2</GameBoardRowLabel>
+              <GameBoardRowLabel>1</GameBoardRowLabel>
+              <GameBoardCornerDot/>
+            </GameBoardColumn>
             {
               Array(7).fill(0).map((_, rowIndex) =>
                 <GameBoardColumn key={`column${rowIndex}`}>
@@ -99,22 +140,23 @@ export const Board = ({}) => {
                       const modifier = getTileModifierWithCoords(gameContextState, columnIndex, rowIndex) ?? "";
                       const stones = getTileStonesWithCoords(gameContextState, columnIndex, rowIndex) ?? [];
                       return <GameTile
-                        onClick={() => {
-                            if(stones[0] && validateMove(gameContextState, stones[0])) {
-                                gameDispatch(Actions.moveStone(stones[0]))
-                                gameDispatch(Actions.resetRolled())
-                            }
-                        }}
-                        key={`Tile[${columnIndex},${rowIndex}]`}
-                        modifier={modifier}
-                      >
-                        {stones.length > 0 ? <GameStone color={stones[0].charAt(0)}/> : null}
-                        <GameTileText>
-                            {stones.length > 0 ? stones.length : ""}
-                        </GameTileText>
-                      </GameTile>
+                          onClick={() => {
+                              if(stones[0] && validateMove(gameContextState, stones[0])) {
+                                  gameDispatch(Actions.moveStone(stones[0]))
+                                  gameDispatch(Actions.resetRolled())
+                              }
+                          }}
+                          key={`Tile[${columnIndex},${rowIndex}]`}
+                          modifier={modifier}
+                        >
+                          {stones.length > 0 ? <GameStone color={stones[0].charAt(0)}/> : null}
+                          <GameTileText>
+                              {stones.length > 0 ? stones.length : ""}
+                          </GameTileText>
+                        </GameTile>
                     })
                   }
+                  <GameBoardColumnLabel>{ rowLetterMap?.[rowIndex] ?? ""}</GameBoardColumnLabel>
                 </GameBoardColumn>
               )
             }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { defaultGameState, whiteStoneIDs, blackStoneIDs, whiteStonePath, blackStonePath } from './gameContextConstants';
+import { defaultGameState, whiteStoneIDs, blackStoneIDs, whiteStonePath, blackStonePath, rowLetterMap } from './gameContextConstants';
 
 export const GameContext = React.createContext([]);
 
@@ -17,20 +17,26 @@ export const getTileStonesWithCoords = (state, x, y) => (
   state.boardState[x][y].stones
 );
 
-export const moveStone = (prevState, stoneID, newLocation) => ({
-  ...prevState,
-  boardState:
-      stoneID === "Error"
-      ? prevState.boardState
-      : addInStone(
-          prevState.boardState.map((row, x) => (
-              row.map((tile, y) => ({
-                  ...tile,
-                  stones: tile.stones?.filter((id) => id !== stoneID) ?? [],
-              }))
-          )),
-      stoneID, newLocation),
-})
+export const moveStone = (prevState, stoneID, newLocation) => {
+    const activePlayerText = prevState.gameState.activePlayer === "W" ? "White" : "Black";
+    const loggedPrevState = addToMoveLog(prevState, [`${activePlayerText} moved to ${
+        rowLetterMap[newLocation[1]] + (3 - newLocation[0])
+    }`])
+    return {
+        ...loggedPrevState,
+        boardState:
+            stoneID === "Error"
+            ? loggedPrevState.boardState
+            : addInStone(
+                loggedPrevState.boardState.map((row, x) => (
+                    row.map((tile, y) => ({
+                        ...tile,
+                        stones: tile.stones?.filter((id) => id !== stoneID) ?? [],
+                    }))
+                )),
+            stoneID, newLocation),
+    };
+};
 
 export const bumpStone = (prevState, stoneID, newLocation) => {
   const [x, y] = newLocation
@@ -82,24 +88,31 @@ const setRollResult = (state, rollResult) => {
         ? whiteStoneIDs
         : blackStoneIDs
     ).filter((id) => validateMove(testState, id))
-    return calculateMoveDistance(testState) > 0
+    const moveDistance = calculateMoveDistance(testState);
+    const activePlayerText = state.gameState.activePlayer === "W" ? "White" : "Black";
+    const noValidMoveLoggedState = addToMoveLog(state, [
+        `${activePlayerText} rolled ${moveDistance}`, 
+        `${activePlayerText} had no valid moves`
+    ]);
+    const rollZeroLoggedState = addToMoveLog(state, [
+        `${activePlayerText} rolled ${moveDistance}`
+    ]);
+    return moveDistance > 0
         ? validMoves.length > 0
-            ? testState
+            ? addToMoveLog(testState, [`${activePlayerText} rolled ${moveDistance}`])
             : {
-                ...advanceTurn(state, "None"),
+                ...noValidMoveLoggedState,
                 gameState: {
-                  ...state.gameState,
-                  moveMessage: "No Valid Moves",
+                    ...advanceTurn(noValidMoveLoggedState, "None").gameState
                 },
             }
         : {
-              ...advanceTurn(state, "None"),
-              gameState: {
-                ...state.gameState,
-                moveMessage: "Skipped Turn"
+            ...rollZeroLoggedState,
+            gameState: {
+                ...advanceTurn(rollZeroLoggedState, "None").gameState,
             },
         }
-}
+};
 
 const resetRollResult = (state) => ({
     ...state,
@@ -114,7 +127,7 @@ const incrementTurnNumber = (state) => ({
     ...state,
     gameState: {
         ...state.gameState,
-        turnNumber: state.gameState.turnNumber + 1
+        turnNumber: state.gameState.turnNumber + 1,
     }
 })
 
@@ -170,17 +183,17 @@ const advanceTurn = (state, stoneID) => {
         if(modifier !== "Rosette") {
             return nextActivePlayer === "W"
                 ? {
-                    ...incrementTurnNumber(state),
+                    ...state,
                     gameState: {
-                      ...state.gameState,
-                      activePlayer: nextActivePlayer
+                        ...incrementTurnNumber(state).gameState,
+                        activePlayer: nextActivePlayer
                     },
                 }
                 : {
                     ...state,
                     gameState: {
-                      ...state.gameState,
-                      activePlayer: nextActivePlayer,
+                        ...state.gameState,
+                        activePlayer: nextActivePlayer,
                     },
                 }
         }
@@ -188,11 +201,11 @@ const advanceTurn = (state, stoneID) => {
     return state
 }
 
-const addToChatLog = (state, moveToLog) => ({
+const addToMoveLog = (state, moveToLogArr) => ({
     ...state,
     gameState: {
         ...state.gameState,
-        chatLog: [...state.gameState.chatLog, moveToLog],
+        moveLog: [...state.gameState.moveLog, ...moveToLogArr],
     }
 })
 
@@ -218,7 +231,7 @@ export const gameReducer = (state, action) => {
     case "moveStone":
         return moveStoneWrap(state, action.parameters.stoneID);
     case "logMove":
-        return addToChatLog(state, action.paraemeters.moveToLog);
+        return addToMoveLog(state, action.paraemeters.moveToLog);
     case "resetState":
         return defaultGameState;
     default:
