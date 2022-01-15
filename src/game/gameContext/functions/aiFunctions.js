@@ -26,17 +26,26 @@ export const aiTurn = (state, dispatch) => {
             const landingCoords = calculateLandingCoords(state, stoneID);
             const [x, y] = landingCoords;
             const strengthValue = (
-                (getTileStonesWithCoords(state, x, y)?.length ?? 0) > 0 
-                    ? 30 
-                    : 0
-                + (getTileModifierWithCoords(state, x, y) ?? "") === "Rosette" 
-                    ? 15
-                    : 0
-                + aiPath.reduce((pathCoords, index) => (
-                    compareCoords(pathCoords, landingCoords)
-                        ? index+1
-                        : 0
-                ), 0)
+                    (
+                        (getTileStonesWithCoords(state, x, y)?.length ?? 0) > 0 
+                        && (getTileModifierWithCoords(state, x, y) ?? "") !== "Empty" 
+                            ? 30 
+                            : 0 
+                    )
+                + 
+                    (
+                        (getTileModifierWithCoords(state, x, y) ?? "") === "Rosette" 
+                            ? 15
+                            : 0
+                    )
+                + 
+                    (
+                        aiPath.reduce((accumulator, pathCoords, index) => (
+                            compareCoords(pathCoords, landingCoords)
+                                ? index+1
+                                : accumulator
+                        ), 0)
+                    )
             );
             return ({
                 stoneID: stoneID,
@@ -44,7 +53,9 @@ export const aiTurn = (state, dispatch) => {
             });
         });
 
-        const sortedStrengthOfMove = strengthOfMove.sort((firstMove, secondMove)=> firstMove.strength - secondMove.strength)
+
+        const sortedStrengthOfMove = strengthOfMove.sort((firstMove, secondMove)=> secondMove.strength - firstMove.strength)
+        console.log(sortedStrengthOfMove);
         const bestStoneToMove = sortedStrengthOfMove[0].stoneID;
         dispatch(Actions.moveStone(bestStoneToMove));
         dispatch(Actions.resetRolled());

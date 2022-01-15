@@ -35,9 +35,13 @@ export const getTileWithID = (state, stoneID) => (
   
   export const moveStone = (prevState, stoneID, newLocation) => {
       const activePlayerText = prevState.gameState.activePlayer === "W" ? "White" : "Black";
-      const loggedPrevState = addToMoveLog(prevState, [`${activePlayerText} moved to ${
-          rowLetterMap[newLocation[1]] + (3 - newLocation[0])
-      }`])
+      const loggedPrevState = (
+        getTileModifierWithCoords(prevState, newLocation[0], newLocation[1]) !== "Empty"
+            ? addToMoveLog(prevState, [`${activePlayerText} moved to ${
+                rowLetterMap[newLocation[1]] + (3 - newLocation[0])
+            }`])
+            : prevState
+      )
       return {
           ...loggedPrevState,
           boardState:

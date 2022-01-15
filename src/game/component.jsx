@@ -26,7 +26,7 @@ export const Game = ({}) => {
     }, [gameContextState]);
 
     return <>
-        {console.log(gameContextState)}
+        {/*console.log(gameContextState)*/}
         <GameContext.Provider value={innerContext}>
             {
                 gameContextState.gameState.gameType === ""
