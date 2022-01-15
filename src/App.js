@@ -6,11 +6,7 @@ import { Game }   from './game';
 
 function App() {
 
-    return <Switch>
-        <Route path="/GameofTwentySquares">
-            <Game/>
-        </Route>
-    </Switch>
+    return <Game/>
 }
 
 /* 
