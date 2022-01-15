@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { GameContext } from '../gameContext/functions/gameStateFunctions';
+import { GameContext } from '../gameContext';
 
 const TitleTextWrap = styled.div`
     position : absolute;
