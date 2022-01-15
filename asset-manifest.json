@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/GameofTwentySquares/static/css/main.0eaa956c.chunk.css",
+    "main.js": "/GameofTwentySquares/static/js/main.2f685bab.chunk.js",
+    "main.js.map": "/GameofTwentySquares/static/js/main.2f685bab.chunk.js.map",
+    "runtime-main.js": "/GameofTwentySquares/static/js/runtime-main.139dd5ed.js",
+    "runtime-main.js.map": "/GameofTwentySquares/static/js/runtime-main.139dd5ed.js.map",
+    "static/js/2.3fffcfd6.chunk.js": "/GameofTwentySquares/static/js/2.3fffcfd6.chunk.js",
+    "static/js/2.3fffcfd6.chunk.js.map": "/GameofTwentySquares/static/js/2.3fffcfd6.chunk.js.map",
+    "index.html": "/GameofTwentySquares/index.html",
+    "static/css/main.0eaa956c.chunk.css.map": "/GameofTwentySquares/static/css/main.0eaa956c.chunk.css.map",
+    "static/js/2.3fffcfd6.chunk.js.LICENSE.txt": "/GameofTwentySquares/static/js/2.3fffcfd6.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.139dd5ed.js",
+    "static/js/2.3fffcfd6.chunk.js",
+    "static/css/main.0eaa956c.chunk.css",
+    "static/js/main.2f685bab.chunk.js"
+  ]
+}
