@@ -1,6 +1,6 @@
 {
+  "homepage": "https://justintaylorweiss.github.io/GameofTwentySquares",
   "name": "GameOfTwentySquares",
-  "homepage": "https://justintaylorweiss.github.io/GameofTwentySquares/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
