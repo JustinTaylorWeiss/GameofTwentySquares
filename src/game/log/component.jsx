@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import * as Actions from '../gameContext/actions'
 import { GameContext } from '../gameContext';
 import { HelpIcon } from './assets/helpIcon';
 import { SettingsIcon } from './assets/settingsIcon';
@@ -26,8 +27,8 @@ const TurnMoveTracker = styled.div`
     align-items: center;
     height: 10vh;
     width: 100%;
-    text-align: left;
-    font-size: 2rem;
+    text-align: center;
+    font-size: 2.5rem;
     color: ${props => props.color};
     background-color: #7851A9;
     border-bottom: 2px solid #000000;
@@ -68,18 +69,18 @@ export const Line = styled.div`
     border-bottom: solid 2px #7851A9;
 `;
 
-export const Log = ({updateWindowState}) => {
+export const Log = ({}) => {
 
-  const [gameContextState, _] = React.useContext(GameContext);
+  const [gameContextState, dispatch] = React.useContext(GameContext);
 
   return <LogWrap>
       <TurnMoveTracker color={gameContextState.gameState.activePlayer === "W" ? "#FFFFFF" : "#000000"}>
           <IconWrap>
-              <HelpIcon onClick={() => updateWindowState("Info")}/>
+              <HelpIcon onClick={() => dispatch(Actions.setWindowState("Info"))}/>
           </IconWrap>
               Turn {gameContextState.gameState.turnNumber}
           <IconWrap>
-              <SettingsIcon onClick={() => updateWindowState("Settings")}/>
+              <SettingsIcon onClick={() => dispatch(Actions.setWindowState("Settings"))}/>
           </IconWrap>
       </TurnMoveTracker>
           <MovesWrap>
@@ -87,16 +88,16 @@ export const Log = ({updateWindowState}) => {
               {
                   (gameContextState?.gameState?.moveLog ?? []).map((message, i) => (
                       message !== "-" 
-                      ? <LogEntry color={
-                          message.substring(0, 5) === "White"
-                          ? "#FFFFFF"
-                          : message.substring(0, 5) === "Black"
-                          ? "#000000"
-                          : "#7851A9"
-                      } key={`log-${i}`}>
+                      ? <LogEntry key={`Message-${i}`} color={
+                            message.substring(0, 5) === "White"
+                            ? "#FFFFFF"
+                            : message.substring(0, 5) === "Black"
+                            ? "#000000"
+                            : "#7851A9"
+                        }>
                           {message}
                       </LogEntry>
-                      : <Line/>
+                      : <Line key={`Line-${i}`}/>
                   ))
               }
               </SwapDirectionWrap>

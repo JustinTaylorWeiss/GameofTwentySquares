@@ -1,9 +1,8 @@
-import * as uiComponents from '../../global/components/uiComponents';
-import * as uiStyles from '../../global/styles';
-import styled, { css } from "styled-components";
-import { GameContext } from '../gameContext';
 import React from 'react';
-import * as Actions from '../actions'
+import styled from "styled-components";
+import * as g from '../../global/components';
+import * as Actions from '../gameContext/actions'
+import { GameContext } from '../gameContext';
 
 
 const DiceRow = styled.div`
@@ -17,7 +16,7 @@ const DiceRow = styled.div`
     align-items: center;
 `;
 
-const Die = styled(uiComponents.Triangle)`
+const Die = styled(g.Triangle)`
     height: 100px;
     width: 100px;
     margin: 10px;
@@ -39,7 +38,10 @@ const RollButton = styled.div`
 const RollText = styled.div`
     color: white;
     font-size: 1.5rem;
-    ${uiStyles.absoluteCenter}
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -51,7 +53,7 @@ const RollText = styled.div`
 
 export const Dice = ({}) => {
 
-    const [gameContextState, gameDispatch] = React.useContext(GameContext);
+    const [gameContextState, dispatch] = React.useContext(GameContext);
     
     return (
         <DiceRow>
@@ -65,7 +67,7 @@ export const Dice = ({}) => {
             }
             {
                 !gameContextState.gameState.rolled &&
-                <RollButton onClick={() => gameDispatch(Actions.rollDice())}>
+                <RollButton onClick={() => dispatch(Actions.rollDice())}>
                     <RollText>
                         Roll
                     </RollText>

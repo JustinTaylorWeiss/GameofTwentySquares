@@ -1,21 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Log } from '../log';
+import * as Actions from '../gameContext/actions'
 import { GameContext } from '../gameContext';
-import * as Actions from '../actions'
-
-const TitleText = styled.h1`
-    position : absolute;
-    transform: translate(-50%, -50%);
-    top: 8vh;
-    left: 50vw;
-    font-size: 4rem;
-    margin: 0;
-    letter-spacing: 0.1em;
-    text-align: center;
-    font-weight: 700;
-    color: #7851A9;
-`;
 
 const SubTitleText = styled.h2`
     font-size: 3rem;
@@ -63,28 +49,33 @@ const Window = styled.div`
     border: 10px solid #7851A9;
 `;
 
-const InfoWindow = ({updateWindowState}) => <>
-    <Blur onClick={() => updateWindowState("")}/> 
-    <Window>
-        <SubTitleText>
-            How to play
-        </SubTitleText>
-    </Window>
-</>;
+const InfoWindow = ({}) => {
 
-const SettingsWindow = ({updateWindowState}) => {
+    const [_, dispatch] = React.useContext(GameContext);
 
-    const [gameContextState, dispatch] = React.useContext(GameContext);
+    return <>
+        <Blur onClick={() => dispatch(Actions.setWindowState(""))}/> 
+        <Window>
+            <SubTitleText>
+                How to play
+            </SubTitleText>
+        </Window>
+    </>
+};
+
+const SettingsWindow = ({}) => {
+
+    const [_, dispatch] = React.useContext(GameContext);
 
     return  <>
-        <Blur onClick={() => updateWindowState("")}/> 
+        <Blur onClick={() => dispatch(Actions.setWindowState(""))}/> 
         <Window>
             <SubTitleText>
                 Settings
             </SubTitleText>
             <SubTitleTextButton onClick={() => { 
                 dispatch(Actions.resetState());
-                updateWindowState("");
+                dispatch(Actions.setWindowState(""));
             }}>
                 Reset Game
             </SubTitleTextButton>
@@ -92,25 +83,16 @@ const SettingsWindow = ({updateWindowState}) => {
     </>
 };
 
-const TitleTextC = ({}) => (
-    <TitleText>
-        Game of Twenty Squares
-    </TitleText>
-);
+export const PopupWindows = ({}) => {
 
-
-export const AbsoluteAccesories = ({}) => {
-    
-    const [windowState, updateWindowState] = React.useState("");
+    const [gameContextState, _] = React.useContext(GameContext);
 
     return <>
-        <TitleTextC/>
-        <Log updateWindowState={updateWindowState}/>
         {
-            windowState === "Info" && <InfoWindow updateWindowState={updateWindowState} dispatch/>
+            gameContextState.gameState.windowState === "Info" && <InfoWindow/>
         }
         {
-            windowState === "Settings" && <SettingsWindow updateWindowState={updateWindowState}/>
+            gameContextState.gameState.windowState === "Settings" && <SettingsWindow/>
         }
     </>
 };

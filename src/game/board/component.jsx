@@ -1,11 +1,8 @@
 import React from 'react';
-import * as uiComponents from '../../global/components/uiComponents';
-import * as uiStyles from '../../global/styles';
-import { Link } from 'react-router-dom';
 import styled, { css } from "styled-components";
-import { GameContext, getTileStonesWithCoords, getTileModifierWithCoords, validateMove } from '../gameContext';
-import { rowLetterMap } from '../gameContextConstants';
-import * as Actions from '../actions'
+import * as g from '../../global/components';
+import * as Actions from '../gameContext/actions'
+import { GameContext, getTileStonesWithCoords, getTileModifierWithCoords, validateMove, rowLetterMap } from '../gameContext';
 
 
 const GameBoardWrapper = styled.div`
@@ -88,6 +85,13 @@ const GameTile = styled.div`
 `;
 
 
+/*
+<div className='scalable'>
+    <img className='drop-shadow' id={ planet.name } src={ planet.image } alt={ planet.name } />
+</div>
+*/
+
+
 const GameTileText = styled.div`
     color: #7851A9;
     font-size: 2.5rem;
@@ -95,11 +99,14 @@ const GameTileText = styled.div`
     user-select: none;
     line-height: 0em;
     z-index: 3;
-    ${uiStyles.absoluteCenter}
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
     top: calc(50% - 2px);
 `;
 
-const GameStone = styled(uiComponents.Circle)`
+const GameStone = styled(g.Circle)`
     width: 75%;
     height: 75%;
     z-index: 2;
@@ -121,15 +128,15 @@ const GameStone = styled(uiComponents.Circle)`
 
 export const Board = ({}) => {
 
-    const [gameContextState, gameDispatch] = React.useContext(GameContext);
+    const [gameContextState, dispatch] = React.useContext(GameContext);
 
     return <>
         <GameBoardWrapper>
           <GameBoardRow>
             <GameBoardColumn key={`Labelcolumn`}>
-              <GameBoardRowLabel>3</GameBoardRowLabel>
-              <GameBoardRowLabel>2</GameBoardRowLabel>
-              <GameBoardRowLabel>1</GameBoardRowLabel>
+              <GameBoardRowLabel key="Label3">3</GameBoardRowLabel>
+              <GameBoardRowLabel key="Label2">2</GameBoardRowLabel>
+              <GameBoardRowLabel key="Label1">1</GameBoardRowLabel>
               <GameBoardCornerDot/>
             </GameBoardColumn>
             {
@@ -142,8 +149,8 @@ export const Board = ({}) => {
                       return <GameTile
                           onClick={() => {
                               if(stones[0] && validateMove(gameContextState, stones[0])) {
-                                  gameDispatch(Actions.moveStone(stones[0]))
-                                  gameDispatch(Actions.resetRolled())
+                                  dispatch(Actions.moveStone(stones[0]))
+                                  dispatch(Actions.resetRolled())
                               }
                           }}
                           key={`Tile[${columnIndex},${rowIndex}]`}
@@ -156,11 +163,11 @@ export const Board = ({}) => {
                         </GameTile>
                     })
                   }
-                  <GameBoardColumnLabel>{ rowLetterMap?.[rowIndex] ?? ""}</GameBoardColumnLabel>
+                  <GameBoardColumnLabel key={`${rowIndex}CLabel`}>{ rowLetterMap?.[rowIndex] ?? ""}</GameBoardColumnLabel>
                 </GameBoardColumn>
               )
             }
           </GameBoardRow>
         </GameBoardWrapper>
     </>
-}
+};

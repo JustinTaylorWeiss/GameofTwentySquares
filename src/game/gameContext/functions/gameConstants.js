@@ -1,4 +1,43 @@
-export const rowLetterMap = ["A", "B", "C", "D", "E", "F", "G"];
+
+// Functions
+
+export const compareCoords = (x, y) => (
+  x[0] === y[0] && x[1] === y[1]
+)
+
+export const calculateMoveDistance = (state) => (
+  state.gameState.rollResult.filter((r) => r).length
+);
+
+export const calculateLandingCoords = (state, stoneID) => {
+  const tileWithID = state.boardState.flat().find((tile) => {
+    if (!tile.stones) {
+      debugger
+    }
+    return tile?.stones?.includes(stoneID) ?? false
+  })
+  if(stoneID.charAt(0) === "W")
+      return whiteStonePath[
+          whiteStonePath.findIndex((c) =>
+              compareCoords(c, tileWithID.coordinates)) + calculateMoveDistance(state)
+      ]
+  else if(stoneID.charAt(0) === "B")
+      return blackStonePath[
+          blackStonePath.findIndex((c) =>
+              compareCoords(c, tileWithID.coordinates)) + calculateMoveDistance(state)
+      ]
+  else
+      throw new Error("Invalid stone id (not W or B)");
+}
+
+// Data
+
+export const rowLetterMap = [
+  "A", "B", 
+  "C", "D", 
+  "E", "F", 
+  "G",
+];
 
 export const whiteStoneIDs = [
     "W1", "W2", "W3",
@@ -32,12 +71,13 @@ export const blackStonePath = [
 
 export const defaultGameState = {
   gameState: {
-      whoGoesFirst: 0,
+      whoFirst: "",
       turnNumber: 1,
       activePlayer: 'W',
-      moveMessage: '',
       rollResult: [false, false, false, false],
       rolled: false,
+      gameType: "",
+      windowState: "",
       moveLog: ["Welcome to", "Game of Twenty Squares", "-"],
   },
   boardState: [
