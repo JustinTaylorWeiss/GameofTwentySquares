@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "GOTS",
+  "name": "Game of Twenty Squares",
   "icons": [
     {
       "src": "assets/favicon.ico",
