@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { GameContext } from '../gameContext';
+import { GameContext } from '../gameContext/functions/gameStateFunctions';
 
 const TitleTextWrap = styled.div`
     position : absolute;
@@ -33,7 +33,7 @@ export const FloatingText = ({}) => {
     const [gameContextState, _] = React.useContext(GameContext);
 
     return <TitleTextWrap>
-        <H1>Game of Twenty Squares</H1>
+        <H1>Game of Twenty Squares Beta</H1>
         { gameContextState.gameState.gameType === "lpvp" && <H2>Player vs Player</H2> }
         { gameContextState.gameState.gameType === "pvm" && <H2>Player vs AI</H2> }
     </TitleTextWrap>
