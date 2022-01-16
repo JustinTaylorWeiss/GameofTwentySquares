@@ -24,6 +24,15 @@ export const SubTitleText = styled.h2`
     color: #FFFFFF;
 `;
 
+export const MenuH2 = styled.h2`
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    font-weight: 700;
+    color: #7851A9;
+    margin-bottom: 5vh;
+`;
+
 export const SubTitleTextButton = styled.h2`
     font-size: 3rem;
     margin: auto;
@@ -34,6 +43,9 @@ export const SubTitleTextButton = styled.h2`
     background-color: #7851A9;
     padding: 20px 40px;
     border-radius: 10px;
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 export const Blur = styled.div`

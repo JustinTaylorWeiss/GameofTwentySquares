@@ -33,6 +33,9 @@ const RollButton = styled.div`
     height: 80px;
     border-radius: 2px;
     background-color: #7851A9;
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const RollText = styled.div`

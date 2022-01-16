@@ -47,6 +47,9 @@ const IconWrap = styled.div`
     height: 6vh;
     width: 6vh;
     padding: 0 20px;
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const LogEntry = styled.div`

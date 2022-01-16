@@ -84,14 +84,6 @@ const GameTile = styled.div`
   `}
 `;
 
-
-/*
-<div className='scalable'>
-    <img className='drop-shadow' id={ planet.name } src={ planet.image } alt={ planet.name } />
-</div>
-*/
-
-
 const GameTileText = styled.div`
     color: #7851A9;
     font-size: 2.5rem;
@@ -122,6 +114,7 @@ const GameStone = styled(g.Circle)`
     &:hover {
         width: 80%;
         height: 80%;
+        cursor: pointer;
     }
 `;
 
