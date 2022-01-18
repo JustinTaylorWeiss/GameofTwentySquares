@@ -36,7 +36,7 @@ export const rowLetterMap = [
   "A", "B", 
   "C", "D", 
   "E", "F", 
-  "G",
+  "G", "H",
 ];
 
 export const whiteStoneIDs = [
@@ -50,23 +50,25 @@ export const blackStoneIDs = [
 ];
 
 export const whiteStonePath = [
-  [0,3], [0,2], 
-  [0,1], [0,0], 
-  [1,0], [1,1], 
-  [1,2], [1,3], 
-  [1,4], [1,5], 
-  [1,6], [0,6], 
-  [0,5], [0,4],
+  [0,4], [0,3],
+  [0,2], [0,1], 
+  [0,0], [1,0], 
+  [1,1], [1,2],
+  [1,3], [1,4], 
+  [1,5], [1,6], 
+  [1,7], [0,7], 
+  [0,6], [0,5], 
 ];
 
 export const blackStonePath = [
-  [2,3], [2,2], 
-  [2,1], [2,0], 
-  [1,0], [1,1], 
-  [1,2], [1,3], 
-  [1,4], [1,5], 
-  [1,6], [2,6], 
-  [2,5], [2,4],
+  [2,4], [2,3], 
+  [2,2], [2,1], 
+  [2,0], [1,0], 
+  [1,1], [1,2], 
+  [1,3], [1,4], 
+  [1,5], [1,6], 
+  [1,7], [2,7], 
+  [2,6], [2,5], 
 ];
 
 export const defaultGameState = {
@@ -98,23 +100,28 @@ export const defaultGameState = {
         stones: [],
       },
       { // [0,3]
-        modifier: "Empty",
+        modifier: "None",
         coordinates: [0,3],
-        stones: ["W1","W2","W3","W4","W5","W6"],
+        stones: [],
       },
       { // [0,4]
         modifier: "Empty",
         coordinates: [0,4],
-        stones: [],
+        stones: ["W1","W2","W3","W4","W5","W6"],
       },
       { // [0,5]
-        modifier: "Rosette",
+        modifier: "Empty",
         coordinates: [0,5],
         stones: [],
       },
       { // [0,6]
-        modifier: "None",
+        modifier: "Rosette",
         coordinates: [0,6],
+        stones: [],
+      },
+      { // [0,7]
+        modifier: "None",
+        coordinates: [0,7],
         stones: [],
       },
     ],
@@ -135,12 +142,12 @@ export const defaultGameState = {
         stones: [],
       },
       { // [1,3]
-        modifier: "Rosette",
+        modifier: "None",
         coordinates: [1,3],
         stones: [],
       },
       { // [1,4]
-        modifier: "None",
+        modifier: "Rosette",
         coordinates: [1,4],
         stones: [],
       },
@@ -152,6 +159,11 @@ export const defaultGameState = {
       { // [1,6]
         modifier: "None",
         coordinates: [1,6],
+        stones: [],
+      },
+      { // [1,7]
+        modifier: "None",
+        coordinates: [1,7],
         stones: [],
       },
     ],
@@ -172,23 +184,28 @@ export const defaultGameState = {
         stones: [],
       },
       { // [2,3]
-        modifier: "Empty",
+        modifier: "None",
         coordinates: [2,3],
-        stones: ["B1","B2","B3","B4","B5","B6"],
+        stones: [],
       },
       { // [2,4]
         modifier: "Empty",
         coordinates: [2,4],
-        stones: [],
+        stones: ["B1","B2","B3","B4","B5","B6"],
       },
       { // [2,5]
-        modifier: "Rosette",
+        modifier: "Empty",
         coordinates: [2,5],
         stones: [],
       },
       { // [2,6]
-        modifier: "None",
+        modifier: "Rosette",
         coordinates: [2,6],
+        stones: [],
+      },
+      { // [2,7]
+        modifier: "None",
+        coordinates: [2,7],
         stones: [],
       },
     ],

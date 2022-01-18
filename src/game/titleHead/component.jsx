@@ -3,10 +3,7 @@ import styled from "styled-components";
 import { GameContext } from '../gameContext';
 
 const TitleTextWrap = styled.div`
-    position : absolute;
-    transform: translate(-50%, 0);
-    top: 3vh;
-    left: 50vw;
+    grid-area: mainHead;
     margin: 0;
     text-align: center;
     color: #7851A9;
@@ -14,21 +11,22 @@ const TitleTextWrap = styled.div`
 
 const H1 = styled.h1`
     margin: 0;
-    font-size: 4rem;
-    padding-bottom: 20px;
+    font-size: 3.5rem;
+    font-size: 42px;
+    padding: 2vh 0;
     letter-spacing: 0.1em;
     font-weight: 700;
 `;
 
 const H2 = styled.h2`
     margin: 0;
-    font-size: 3rem;
+    font-size: 2rem;
     letter-spacing: 0.1em;
     font-weight: 700;
     color: #FFFFFF;
 `;
 
-export const FloatingText = ({}) => {
+export const TitleHead = ({}) => {
 
     const [gameContextState, _] = React.useContext(GameContext);
 

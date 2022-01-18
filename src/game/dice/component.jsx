@@ -6,10 +6,7 @@ import { GameContext } from '../gameContext';
 
 
 const DiceRow = styled.div`
-    position: absolute;
-    transform: translate(-50%, 0);
-    bottom: 5vh;
-    left: 50vw;
+    grid-area: dice;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -20,10 +17,10 @@ const Die = styled(g.Triangle)`
     height: 100px;
     width: 100px;
     margin: 10px;
-    & path {
-        transition: all 0.2s;
-        fill: ${props => props.dot ? "#000000" : "#FFFFFF"}
-    }
+    fill: ${props => props.color === "W"
+      ? "#FFFFFF"
+      : "#000000"
+    };
 `;
 
 const RollButton = styled.div`
@@ -64,7 +61,7 @@ export const Dice = ({}) => {
                 Array(4).fill(0).map((e, i) =>
                     <Die
                         key={i}
-                        dot={gameContextState.gameState.rollResult[i]}
+                        color={gameContextState.gameState.rollResult[i] ? "B" : "W"}
                     />
                 )
             }

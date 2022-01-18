@@ -5,47 +5,31 @@ import { GameContext } from '../gameContext';
 import { HelpIcon } from './assets/helpIcon';
 import { SettingsIcon } from './assets/settingsIcon';
 
-
-const LogWrap = styled.div` 
-    position : absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transform: translate(-50%, -50%);
-    top: 50vh;
-    left: 11.5vw;
-    width: calc(23vw - 50px);
-    height: calc(100vh - 50px);
-    background-color: #aaaaaa; 
-`;
-
 const TurnMoveTracker = styled.div`
+    grid-area: lMenuHead;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 10vh;
-    width: 100%;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: ${props => props.color};
     background-color: #7851A9;
     border-bottom: 2px solid #000000;
 `;
 
 const MovesWrap = styled.div` 
+    grid-area: lMenu;
     display: flex;
     flex-direction: column-reverse;
-    height: calc(90vh - 50px);
-    width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
+    background-color: #aaaaaa;
 `;
 
 const IconWrap = styled.div`
-    height: 6vh;
-    width: 6vh;
+    height: 3rem;
+    width: 3rem;
     padding: 0 20px;
     :hover {
         cursor: pointer;
@@ -54,14 +38,14 @@ const IconWrap = styled.div`
 
 const LogEntry = styled.div`
     width: 100%;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     letter-spacing: 0.05em;
     margin-left: 1vw;
     color: ${props => props.color};
 `;
 
 const SwapDirectionWrap = styled.div`
-    padding: 10px 0;
+    padding: 20px 0;
     flex-grow: 1;
 `;
 
@@ -76,7 +60,7 @@ export const Log = ({}) => {
 
   const [gameContextState, dispatch] = React.useContext(GameContext);
 
-  return <LogWrap>
+  return <>
       <TurnMoveTracker color={gameContextState.gameState.activePlayer === "W" ? "#FFFFFF" : "#000000"}>
           <IconWrap>
               <HelpIcon onClick={() => dispatch(Actions.setWindowState("Info"))}/>
@@ -105,5 +89,5 @@ export const Log = ({}) => {
               }
               </SwapDirectionWrap>
           </MovesWrap>
-  </LogWrap>
+  </>
 };

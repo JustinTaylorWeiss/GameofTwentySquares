@@ -11,8 +11,8 @@ export const WinScreen = ({}) => {
         <g.Blur/> 
         <g.Window>
             <g.SubTitleText>
-                { gameContextState.boardState[0][4].length >= 6 && "White Wins!" }
-                { gameContextState.boardState[2][4].length >= 6 && "Black Wins!" }
+                { gameContextState.boardState[0][5].length >= 6 && "White Wins!" }
+                { gameContextState.boardState[2][5].length >= 6 && "Black Wins!" }
             </g.SubTitleText>
             <g.SubTitleTextButton onClick={() => dispatch(Actions.resetState())}>
                 Play Again

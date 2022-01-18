@@ -12,11 +12,14 @@ export const PreGameMenu = ({}) => {
     return <>
         <g.Blur/> 
         <g.Window>
+            <g.MenuH2>
+                Choose Game Mode
+            </g.MenuH2>
             <g.SubTitleTextButton key="pvpButton" onClick={() => {
                 dispatch(Actions.setGameType("lpvp"))
                 dispatch(Actions.setWhoFirst(first))
             }}>
-                Local Player vs Player 
+                Player vs Player 
             </g.SubTitleTextButton>
             <g.SubTitleTextButton key="pvmButton" onClick={() => {
                 dispatch(Actions.setGameType("pvm"))

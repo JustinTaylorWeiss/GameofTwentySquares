@@ -29,13 +29,13 @@ export const aiTurn = (state, dispatch) => {
                     (
                         (getTileStonesWithCoords(state, x, y)?.length ?? 0) > 0 
                         && (getTileModifierWithCoords(state, x, y) ?? "") !== "Empty" 
-                            ? 30 
+                            ? 40 
                             : 0 
                     )
                 + 
                     (
                         (getTileModifierWithCoords(state, x, y) ?? "") === "Rosette" 
-                            ? 15
+                            ? 20
                             : 0
                     )
                 + 

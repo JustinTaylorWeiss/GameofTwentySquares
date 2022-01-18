@@ -13,9 +13,9 @@ export const validateMove = (state, stoneID) => {
                 && state.gameState.activePlayer === "B"))
         && (calculateMoveDistance(state) === 0
             || firstStoneAtTargetLocation.charAt(0) !== state.gameState.activePlayer
-            || (compareCoords(landingCoords, [0,4])
-                || compareCoords(landingCoords, [2,4])))
-        && !(compareCoords(landingCoords, [1,3])
+            || (compareCoords(landingCoords, [0,5])
+                || compareCoords(landingCoords, [2,5])))
+        && !(compareCoords(landingCoords, [1,4])
             && (state.boardState[tx][ty]?.stones?.length ?? 0) > 0)
     }
     return false;

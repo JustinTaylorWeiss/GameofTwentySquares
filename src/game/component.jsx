@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from "styled-components";
 import { GameContext, reducer, defaultGameState, isAITurn, aiTurn } from './gameContext';
 
 import { Board } from './board';
@@ -7,12 +8,25 @@ import { Dice } from './dice';
 import { WinScreen } from './winScreen';
 import { PopupWindows } from './popupWindows';
 import { PreGameMenu } from './preGameMenu';
-import { FloatingText } from './floatingText';
+import { TitleHead } from './titleHead';
 
 const didSomeoneWin = (state) => (
-    state.boardState[0][4].stones.length >= 6 
-    || state.boardState[2][4].stones.length >= 6
+    state.boardState[0][5].stones.length >= 6 
+    || state.boardState[2][5].stones.length >= 6
 )
+
+const UIGrid = styled.div`
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-rows: 1fr 1fr 6fr 2fr;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas: 
+        "lMenuHead mainHead rMenuHead"
+        "lMenu mainHead rMenu"
+        "lMenu board rMenu"
+        "lMenu dice rMenu";
+`;
 
 export const Game = ({}) => {
 
@@ -26,20 +40,22 @@ export const Game = ({}) => {
     }, [gameContextState]);
 
     return <>
-        {/*console.log(gameContextState)*/}
+        {console.log(gameContextState)}
         <GameContext.Provider value={innerContext}>
-            {
-                gameContextState.gameState.gameType === ""
-                ? <PreGameMenu/>
-                : !didSomeoneWin(gameContextState) 
-                    ? <>
-                        <Log/>
-                        <Dice/>
-                        <Board/>
-                    </>
-                    : <WinScreen/>
-            }
-            <FloatingText/>
+            <UIGrid>
+                <TitleHead/>
+                {
+                    gameContextState.gameState.gameType === ""
+                    ? <PreGameMenu/>
+                    : !didSomeoneWin(gameContextState) 
+                        ? <>
+                            <Log/>
+                            <Dice/>
+                            <Board/>
+                        </>
+                        : <WinScreen/>
+                }
+            </UIGrid>
             <PopupWindows/>
         </GameContext.Provider>
     </>

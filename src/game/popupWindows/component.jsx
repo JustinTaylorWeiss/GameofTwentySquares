@@ -12,7 +12,7 @@ const InstructionWrap = styled.div`
 `;
 
 const ListWrap = styled.div`
-    font-size: 1.75rem;
+    font-size: 1rem;
     line-height: 2em;
     text-align: left;
     font-weight: 400;
@@ -43,16 +43,16 @@ const InfoWindow = ({}) => {
                     How to play
                 </g.MenuH2>
                 <ListWrap>
-                    • The goal of the game is to get all of your stones from the start (D3 for white and D1 for black) to the end. (E3 for white and E1 for black)<br/>
+                    • The goal of the game is to get all of your stones from the start (E3 for white and E1 for black) to the end. (F3 for white and F1 for black)<br/>
                     • The current turn number is displayed in the top left, the color of the text indicates which player is up.<br/>
                     • During each player's turn they roll the dice at the bottom of the screen.<br/>
                     • The number of black triangles you roll determines how many spaces you can move one of your stones.<br/>
                     • You can move any of your stones by clicking on them, they will move using the path drawn below.<br/>
-                    • You can only have one stone on each tile except the start and end. (D3 and E3 for white D1 and E1 for black)<br/>
+                    • You can only have one stone on each tile except the start and end. (E3 and F3 for white E1 and F1 for black)<br/>
                     • If you land on a purple tile you go again.<br/>
                     • If you land on an opponent's stone you send their stone back to the beginning.<br/>
                     • You cannot land on an opponent's stone if they are on a purple tile.<br/>
-                    • You must land on the end (E3 for white and E1 for black) exactly to move there.
+                    • You must land on the end (F3 for white and F1 for black) exactly to move there.
                 </ListWrap>
                 <StyledArrowBoard/>
             </InstructionWrap>
