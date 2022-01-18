@@ -11,12 +11,16 @@ const DiceRow = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    @media only screen and (max-aspect-ratio: 1/1) {
+        flex-direction: column-reverse;
+        grid-area: rMenu;
+    }
 `;
 
 const Die = styled(g.Triangle)`
-    height: 100px;
-    width: 100px;
+    aspect-ratio: 1;
     margin: 10px;
+    max-height: 12vh;
     fill: ${props => props.color === "W"
       ? "#FFFFFF"
       : "#000000"
@@ -26,12 +30,15 @@ const Die = styled(g.Triangle)`
 const RollButton = styled.div`
     position: relative;
     margin-left: 30px;
-    width: 80px;
-    height: 80px;
+    max-height: 12vh;
     border-radius: 2px;
+    padding: 50px;
     background-color: #7851A9;
     :hover {
         cursor: pointer;
+    }
+    @media only screen and (max-aspect-ratio: 1/1) {
+        margin: 0 0 30px 0;
     }
 `;
 

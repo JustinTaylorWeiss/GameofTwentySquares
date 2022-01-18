@@ -16,6 +16,9 @@ const H1 = styled.h1`
     padding: 2vh 0;
     letter-spacing: 0.1em;
     font-weight: 700;
+    @media only screen and (max-aspect-ratio: 1/1) {
+        font-size: 2rem;
+    }
 `;
 
 const H2 = styled.h2`
@@ -24,6 +27,9 @@ const H2 = styled.h2`
     letter-spacing: 0.1em;
     font-weight: 700;
     color: #FFFFFF;
+    @media only screen and (max-aspect-ratio: 1/1) {
+        font-size: 1rem;
+    }
 `;
 
 export const TitleHead = ({}) => {

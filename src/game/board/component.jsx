@@ -7,7 +7,7 @@ import { GameContext, getTileStonesWithCoords, getTileModifierWithCoords, valida
 
 const GameBoardGrid = styled.div`
   grid-area: board;
-  display: grid;
+  display: inline-grid;
   align-self: center;
   margin: 0 1vw;
   aspect-ratio: 25/10;
@@ -22,6 +22,9 @@ const GameBoardGrid = styled.div`
   @media only screen and (max-aspect-ratio: 1/1) {
     margin: 1vh 0;
     aspect-ratio: 10/25;
+    width: 60%;
+    justify-self: center;
+    place-self: center;
     grid-template-columns: 1fr 3fr 3fr 3fr;
     grid-template-rows: 1fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
     grid-template-areas: 
@@ -43,6 +46,9 @@ const GameBoardLabel = styled.div`
   place-self: center;
   font-size: 1.5rem;
   grid-area: ${props => props.gridarea};
+  @media only screen and (max-aspect-ratio: 1/1) {
+    font-size: 1rem;
+  }
 `;
 
 const GameTile = styled.div`
@@ -82,6 +88,9 @@ const GameTileText = styled.div`
     grid-area: center;
     z-index: 3;
     line-height: 1em;
+    @media only screen and (max-aspect-ratio: 1/1) {
+      font-size: 1.5rem;
+  }
 `;
 
 const GameStone = styled(g.Circle)`

@@ -26,6 +26,13 @@ const UIGrid = styled.div`
         "lMenu mainHead rMenu"
         "lMenu board rMenu"
         "lMenu dice rMenu";
+    @media only screen and (max-aspect-ratio: 1/1) {
+        grid-template-areas: 
+        "lMenuHead mainHead rMenuHead"
+        "lMenu board rMenu"
+        "lMenu board rMenu"
+        "lMenu board rMenu";
+    }
 `;
 
 export const Game = ({}) => {

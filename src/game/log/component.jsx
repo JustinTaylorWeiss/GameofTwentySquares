@@ -5,11 +5,13 @@ import { GameContext } from '../gameContext';
 import { HelpIcon } from './assets/helpIcon';
 import { SettingsIcon } from './assets/settingsIcon';
 
+import { useMediaQuery } from 'react-responsive'
+
 const TurnMoveTracker = styled.div`
     grid-area: lMenuHead;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
     font-size: 2rem;
@@ -28,9 +30,8 @@ const MovesWrap = styled.div`
 `;
 
 const IconWrap = styled.div`
-    height: 3rem;
-    width: 3rem;
-    padding: 0 20px;
+    height: 3.5rem;
+    width: 3.5rem;
     :hover {
         cursor: pointer;
     }
@@ -42,6 +43,17 @@ const LogEntry = styled.div`
     letter-spacing: 0.05em;
     margin-left: 1vw;
     color: ${props => props.color};
+    @media only screen and (max-aspect-ratio: 1/1) {
+        font-size: 1rem;
+    }
+`;
+
+const MiniMenuWrap = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    grid-area: rMenuHead;
 `;
 
 const SwapDirectionWrap = styled.div`
@@ -56,38 +68,57 @@ export const Line = styled.div`
     border-bottom: solid 2px #7851A9;
 `;
 
+const LogButtonsMiniGroup = ({}) => {
+
+    const [_, dispatch] = React.useContext(GameContext);
+
+    return <MiniMenuWrap>
+        <IconWrap>
+            <HelpIcon onClick={() => dispatch(Actions.setWindowState("Info"))}/>
+        </IconWrap>
+        <IconWrap>
+            <SettingsIcon onClick={() => dispatch(Actions.setWindowState("Settings"))}/>
+        </IconWrap>
+    </MiniMenuWrap>
+}
+
 export const Log = ({}) => {
 
   const [gameContextState, dispatch] = React.useContext(GameContext);
 
+  const past1x1 = !useMediaQuery({query: '(max-aspect-ratio: 1/1)'});
+
   return <>
       <TurnMoveTracker color={gameContextState.gameState.activePlayer === "W" ? "#FFFFFF" : "#000000"}>
-          <IconWrap>
+          { past1x1 && <IconWrap>
               <HelpIcon onClick={() => dispatch(Actions.setWindowState("Info"))}/>
-          </IconWrap>
+            </IconWrap>
+          }   
               Turn {gameContextState.gameState.turnNumber}
-          <IconWrap>
+          { past1x1 && <IconWrap>
               <SettingsIcon onClick={() => dispatch(Actions.setWindowState("Settings"))}/>
-          </IconWrap>
+            </IconWrap>
+          }
       </TurnMoveTracker>
-          <MovesWrap>
-              <SwapDirectionWrap>
-              {
-                  (gameContextState?.gameState?.moveLog ?? []).map((message, i) => (
-                      message !== "-" 
-                      ? <LogEntry key={`Message-${i}`} color={
-                            message.substring(0, 5) === "White"
-                            ? "#FFFFFF"
-                            : message.substring(0, 5) === "Black"
-                            ? "#000000"
-                            : "#7851A9"
-                        }>
-                          {message}
-                      </LogEntry>
-                      : <Line key={`Line-${i}`}/>
-                  ))
-              }
-              </SwapDirectionWrap>
-          </MovesWrap>
+        <MovesWrap>
+            <SwapDirectionWrap>
+            {
+                (gameContextState?.gameState?.moveLog ?? []).map((message, i) => (
+                    message !== "-" 
+                    ? <LogEntry key={`Message-${i}`} color={
+                        message.substring(0, 5) === "White"
+                        ? "#FFFFFF"
+                        : message.substring(0, 5) === "Black"
+                        ? "#000000"
+                        : "#7851A9"
+                    }>
+                        {message}
+                    </LogEntry>
+                    : <Line key={`Line-${i}`}/>
+                ))
+            }
+            </SwapDirectionWrap>
+        </MovesWrap>
+        { !past1x1 && <LogButtonsMiniGroup/> }
   </>
 };
