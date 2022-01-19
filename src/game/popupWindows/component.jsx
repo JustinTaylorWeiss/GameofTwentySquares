@@ -31,7 +31,7 @@ const StyledArrowBoard = styled(ArrowBoard)`
     transform: translate(-50%, 0);
     left: 50%;
     width: 50vw;
-    margin-top: 5vh;
+    margin: 5vh 0;
 `;
 
 const InfoWindow = ({}) => {
