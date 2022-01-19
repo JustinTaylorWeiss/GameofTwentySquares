@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import * as Actions from './gameContext/actions';
 import { GameContext, reducer, defaultGameState, isAITurn, aiTurn } from './gameContext';
 
 import { Board } from './board';
@@ -40,6 +41,12 @@ const UIGrid = styled.div`
         "lMenuHead mainHead rMenuHead"
         "board board board"
         "dice dice dice";
+        ${props => props.state.gameState.hideTitle && `
+            grid-template-areas: 
+            "lMenuHead dice rMenuHead"
+            "board board board"
+            ". . .";
+        `}
     }
 `;
 
@@ -49,6 +56,18 @@ export const Game = ({}) => {
     const [gameContextState, dispatch] = innerContext;
 
     React.useEffect(() => {
+        const onResize = () => {
+            if (window.innerWidth > 700) {
+                dispatch(Actions.setHideTitle(false));
+            }
+        }
+        onResize();
+    
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+      }, []);
+
+    React.useEffect(() => {
         if(isAITurn(gameContextState)){
             aiTurn(gameContextState, dispatch);
         }
@@ -56,7 +75,7 @@ export const Game = ({}) => {
 
     return <>
         <GameContext.Provider value={innerContext}>
-            <UIGrid>
+            <UIGrid state={gameContextState}>
                 <TitleHead/>
                 {
                     gameContextState.gameState.gameType === ""

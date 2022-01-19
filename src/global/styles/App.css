@@ -1,7 +1,12 @@
+html {
+  background-color: #7851A9;
+}
+
 body {
   background-color: #373737;
   margin: 0;
   font-family: Arial, sans-serif;
   overflow-y: hidden;
 }
+
 

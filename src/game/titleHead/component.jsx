@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
+import * as Actions from '../gameContext/actions'
 import { GameContext } from '../gameContext';
+import { useMediaQuery } from 'react-responsive'; 
 
 const TitleTextWrap = styled.div`
     grid-area: mainHead;
@@ -48,11 +50,15 @@ const H2 = styled.h2`
 
 export const TitleHead = ({}) => {
 
-    const [gameContextState, _] = React.useContext(GameContext);
+    const [gameContextState, dispatch] = React.useContext(GameContext);
 
-    return <TitleTextWrap>
-        <H1>Game of Twenty Squares Beta</H1>
-        { gameContextState.gameState.gameType === "lpvp" && <H2>Player vs Player</H2> }
-        { gameContextState.gameState.gameType === "pvm" && <H2>Player vs AI</H2> }
-    </TitleTextWrap>
+    return <>
+        {
+            !gameContextState.gameState.hideTitle && <TitleTextWrap>
+                <H1>Game of Twenty Squares Beta</H1>
+                { gameContextState.gameState.gameType === "lpvp" && <H2>Player vs Player</H2> }
+                { gameContextState.gameState.gameType === "pvm" && <H2>Player vs AI</H2> }
+            </TitleTextWrap>
+        }
+    </>
 };

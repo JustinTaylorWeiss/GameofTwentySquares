@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
-import * as Actions from '../gameContext/actions'
+import * as Actions from '../gameContext/actions';
 import { GameContext } from '../gameContext';
 import { HelpIcon } from './assets/helpIcon';
 import { SettingsIcon } from './assets/settingsIcon';
 import { MenuIcon } from './assets/menuIcon';
 import { Arrow } from './assets/arrow';
+import { MinusIcon } from './assets/minusIcon';
+import { AddIcon } from './assets/addIcon';
 
 import { useMediaQuery } from 'react-responsive';
 import MediaQuery from 'react-responsive';
@@ -73,6 +75,29 @@ const StyledMenuIcon = styled(MenuIcon)`
     grid-area: lMenuHead;
     width: 80%;
     place-self: center;
+    :hover {
+        cursor: pointer;
+    }
+`;
+
+const StyledAddIcon = styled(AddIcon)`
+    grid-area: rMenuHead;
+    width: 80%;
+    fill: #7851A9;
+    place-self: center;
+    :hover {
+        cursor: pointer;
+    }
+`;
+
+const StyledMinusIcon = styled(MinusIcon)`
+    grid-area: rMenuHead;
+    width: 80%;
+    fill: #7851A9;
+    place-self: center;
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 export const Line = styled.div`
@@ -141,24 +166,26 @@ const numberToPostFix = (n) => {
             : n + postFixMap[n % 10]
 }
 
-const HamburgerLog = ({updateHamburgerState}) => {
+const TrackerAndMoves = ({media}) => {
 
     const [gameContextState, dispatch] = React.useContext(GameContext);
+    const past1x1 = !useMediaQuery({query: '(max-aspect-ratio: 1/1)'});
 
-    return <HamburgerGrid>
-        <ArrowWrap>
-            <StyledArrow onClick={() => updateHamburgerState(false)}/>
-        </ArrowWrap>
+    return <>
         <TurnMoveTracker color={gameContextState.gameState.activePlayer === "W" ? "#FFFFFF" : "#000000"}>
-            <IconWrap>
-                <HelpIcon onClick={() => dispatch(Actions.setWindowState("Info"))}/>
-            </IconWrap>  
+            { 
+                (past1x1 || !media) && <IconWrap>
+                    <HelpIcon onClick={() => dispatch(Actions.setWindowState("Info"))}/>
+                </IconWrap>
+            }   
                 {gameContextState.gameState.activePlayer === "W" ? "White's " : "Black's "}
                 {numberToPostFix(gameContextState.gameState.turnNumber)} 
                 Turn
-            <IconWrap>
-                <SettingsIcon onClick={() => dispatch(Actions.setWindowState("Settings"))}/>
-            </IconWrap>
+            {
+                (past1x1 || !media) && <IconWrap>
+                    <SettingsIcon onClick={() => dispatch(Actions.setWindowState("Settings"))}/>
+                </IconWrap>
+            }
         </TurnMoveTracker>
             <MovesWrap>
                 <SwapDirectionWrap>
@@ -179,8 +206,17 @@ const HamburgerLog = ({updateHamburgerState}) => {
                 }
                 </SwapDirectionWrap>
             </MovesWrap>
+    </>
+};
+
+const HamburgerLog = ({updateHamburgerState}) => (
+    <HamburgerGrid>
+        <ArrowWrap>
+            <StyledArrow onClick={() => updateHamburgerState(false)}/>
+        </ArrowWrap>
+        <TrackerAndMoves media={false}/>
     </HamburgerGrid>
-}
+);
 
 export const Log = ({}) => {
 
@@ -194,43 +230,17 @@ export const Log = ({}) => {
         hamburgerState 
         ? <HamburgerLog updateHamburgerState={updateHamburgerState}/>
         : <MediaQuery minWidth={701}>
-            <TurnMoveTracker color={gameContextState.gameState.activePlayer === "W" ? "#FFFFFF" : "#000000"}>
-                { past1x1 && <IconWrap>
-                    <HelpIcon onClick={() => dispatch(Actions.setWindowState("Info"))}/>
-                    </IconWrap>
-                }   
-                    {gameContextState.gameState.activePlayer ? "White's " : "Black's "}
-                    {numberToPostFix(gameContextState.gameState.turnNumber)} 
-                    Turn
-                { past1x1 && <IconWrap>
-                    <SettingsIcon onClick={() => dispatch(Actions.setWindowState("Settings"))}/>
-                    </IconWrap>
-                }
-            </TurnMoveTracker>
-                <MovesWrap>
-                    <SwapDirectionWrap>
-                    {
-                        (gameContextState?.gameState?.moveLog ?? []).map((message, i) => (
-                            message !== "-" 
-                            ? <LogEntry key={`Message-${i}`} color={
-                                message.substring(0, 5) === "White"
-                                ? "#FFFFFF"
-                                : message.substring(0, 5) === "Black"
-                                ? "#000000"
-                                : "#7851A9"
-                            }>
-                                {message}
-                            </LogEntry>
-                            : <Line key={`Line-${i}`}/>
-                        ))
-                    }
-                    </SwapDirectionWrap>
-                </MovesWrap>
-                { !past1x1 && <LogButtonsMiniGroup/> }
+            <TrackerAndMoves media={true}/>
+            { !past1x1 && <LogButtonsMiniGroup/> }
         </MediaQuery>
     }
     <MediaQuery maxWidth={700}>
         <StyledMenuIcon onClick={() => updateHamburgerState(true)}/>
+        {
+            gameContextState?.gameState?.hideTitle ?? false
+            ? <StyledAddIcon onClick={() => dispatch(Actions.setHideTitle(false))}/>
+            : <StyledMinusIcon onClick={() => dispatch(Actions.setHideTitle(true))}/>
+        }
     </MediaQuery>
   </>
 };

@@ -79,6 +79,7 @@ export const defaultGameState = {
       rollResult: [false, false, false, false],
       rolled: false,
       gameType: "",
+      hideTitle: false,
       windowState: "",
       moveLog: ["Welcome to", "Game of Twenty Squares", "-"],
   },

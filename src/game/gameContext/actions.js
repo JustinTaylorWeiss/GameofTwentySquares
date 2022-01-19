@@ -48,6 +48,13 @@ export const setWhoFirst = (whoFirst) => ({
     },
 })
 
+export const setHideTitle = (title) => ({
+    type: "setHideTitle",
+    parameters: {
+        setTitle: title
+    },
+})
+
 // LOG STATE ACTIONS //
 
 export const logMove = (moveToLog) => ({

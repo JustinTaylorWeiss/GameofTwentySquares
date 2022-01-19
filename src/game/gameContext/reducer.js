@@ -1,7 +1,7 @@
 import { moveStoneWrap } from './functions/boardStateFunctions';
 import { rollDice, resetRollResult } from './functions/diceStateFunctions';
 import { defaultGameState } from './functions/gameConstants';
-import { setTheGameType, setTheWindowState, setTheWhoFirst } from './functions/gameStateFunctions';
+import { setTheGameType, setTheWindowState, setTheWhoFirst, setHideTitle } from './functions/gameStateFunctions';
 import { addToMoveLog } from './functions/logStateFunctions';
 
 
@@ -21,6 +21,8 @@ export const reducer = (state, action) => {
             return setTheWindowState(state, action.parameters.windowState);
         case "setWhoFirst":
             return setTheWhoFirst(state, action.parameters.whoFirst);
+        case "setHideTitle":
+            return setHideTitle(state, action.parameters.setTitle);
         case "resetState":
             return defaultGameState;
         default:

@@ -53,6 +53,14 @@ export const setTheWindowState = (state, windowState) => ({
     },
 });
 
+export const setHideTitle = (state, hideTitle) => ({
+    ...state,
+    gameState: {
+        ...state.gameState,
+        hideTitle: hideTitle,
+    }
+});
+
 export const setTheWhoFirst = (state, whoFirst) => ({
     ...state,
     gameState: {
