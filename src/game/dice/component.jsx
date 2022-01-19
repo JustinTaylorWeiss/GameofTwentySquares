@@ -49,10 +49,10 @@ const RollButton = styled.div`
     }
     @media only screen and (max-aspect-ratio: 1/1) {
         margin: 0 0 30px 0;
-        @media only screen and (max-width: 700px) {
-            margin: 0 0 0 10px;
-            padding: 30px;
-        }
+    }
+    @media only screen and (max-width: 700px) {
+        margin: 0 0 0 10px;
+        padding: 30px;
     }
 `;
 

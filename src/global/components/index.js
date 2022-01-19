@@ -22,6 +22,12 @@ export const SubTitleText = styled.h2`
     text-align: center;
     font-weight: 700;
     color: #FFFFFF;
+    @media only screen and (max-aspect-ratio: 1/1) {
+        font-size: min(8vw, 3.75vh);
+    }
+    @media only screen and (max-width: 700px) {
+        font-size: min(5vw, 9.5vh);
+    }
 `;
 
 export const MenuH2 = styled.h2`
@@ -34,7 +40,9 @@ export const MenuH2 = styled.h2`
     --wider-dimension: max(1vh, 1vw);
     @media only screen and (max-aspect-ratio: 1/1) {
         font-size: min(8vw, 3.75vh);
-        
+    }
+    @media only screen and (max-width: 700px) {
+        font-size: min(5vw, 9.5vh);
     }
 `;
 
@@ -59,6 +67,9 @@ export const SubTitleTextButton = styled.h2`
         padding: 0;
         width: 90%;
         height: 20%;
+        font-size: min(5vw, 9.5vh);
+    }
+    @media only screen and (max-width: 700px) {
         font-size: min(5vw, 9.5vh);
     }
 `;
