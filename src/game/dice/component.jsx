@@ -14,6 +14,13 @@ const DiceRow = styled.div`
     @media only screen and (max-aspect-ratio: 1/1) {
         flex-direction: column-reverse;
         grid-area: rMenu;
+        @media only screen and (max-width: 700px) {
+            flex-direction: row;
+            grid-area: dice;
+            width: 75%;
+            align-self: center;
+            justify-self: center;
+        }
     }
 `;
 
@@ -25,6 +32,9 @@ const Die = styled(g.Triangle)`
       ? "#FFFFFF"
       : "#000000"
     };
+    @media only screen and (max-width: 700px) {
+        margin: 5px;
+    }
 `;
 
 const RollButton = styled.div`
@@ -39,6 +49,10 @@ const RollButton = styled.div`
     }
     @media only screen and (max-aspect-ratio: 1/1) {
         margin: 0 0 30px 0;
+        @media only screen and (max-width: 700px) {
+            margin: 0 0 0 10px;
+            padding: 30px;
+        }
     }
 `;
 
@@ -56,6 +70,9 @@ const RollText = styled.div`
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
+    @media only screen and (max-width: 700px) {
+        font-size: 0.75rem;
+    }
 `;
 
 export const Dice = ({}) => {

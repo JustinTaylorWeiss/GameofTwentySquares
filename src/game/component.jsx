@@ -33,6 +33,14 @@ const UIGrid = styled.div`
         "lMenu board rMenu"
         "lMenu board rMenu";
     }
+    @media only screen and (max-width: 700px) {
+        grid-template-rows: 1fr 9fr 1fr;
+        grid-template-columns: 1fr 4fr 1fr;
+        grid-template-areas: 
+        "lMenuHead mainHead rMenuHead"
+        "board board board"
+        "dice dice dice";
+    }
 `;
 
 export const Game = ({}) => {
@@ -47,7 +55,6 @@ export const Game = ({}) => {
     }, [gameContextState]);
 
     return <>
-        {console.log(gameContextState)}
         <GameContext.Provider value={innerContext}>
             <UIGrid>
                 <TitleHead/>

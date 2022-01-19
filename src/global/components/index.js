@@ -64,7 +64,7 @@ export const SubTitleTextButton = styled.h2`
 `;
 
 export const Blur = styled.div`
-    z-index: 2;
+    z-index: 5;
     position: absolute;
     top: 0;
     left: 0;
@@ -74,7 +74,7 @@ export const Blur = styled.div`
 `;
 
 export const Window = styled.div`
-    z-index: 3;
+    z-index: 6;
     position: absolute;
     width: 75vw;
     height: 75vh;

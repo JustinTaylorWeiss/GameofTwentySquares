@@ -36,7 +36,13 @@ const GameBoardGrid = styled.div`
       "CL4 E1 E2 E3"
       "CL5 F1 F2 F3"
       "CL6 G1 G2 G3"
-      "CL7 H1 H2 H3"
+      "CL7 H1 H2 H3";
+    @media only screen and (max-width: 700px) {
+      width: 50%;
+      @media only screen and (max-height: 550px) {
+        width: 40%;
+      }
+    }
   }
 `;
 
@@ -90,7 +96,10 @@ const GameTileText = styled.div`
     line-height: 1em;
     @media only screen and (max-aspect-ratio: 1/1) {
       font-size: 1.5rem;
-  }
+    }
+    @media only screen and (max-height: 550px) {
+      font-size: 0.75rem;
+    }
 `;
 
 const GameStone = styled(g.Circle)`

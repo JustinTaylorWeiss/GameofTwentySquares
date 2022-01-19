@@ -21,6 +21,9 @@ const ListWrap = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media only screen and (max-width: 700px) {
+        font-size: 0.75rem;
+    }
 `;
 
 const StyledArrowBoard = styled(ArrowBoard)`

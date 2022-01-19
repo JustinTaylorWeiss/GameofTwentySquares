@@ -5,6 +5,7 @@ import { GameContext } from '../gameContext';
 const TitleTextWrap = styled.div`
     grid-area: mainHead;
     margin: 0;
+    padding: 0;
     text-align: center;
     color: #7851A9;
 `;
@@ -18,6 +19,13 @@ const H1 = styled.h1`
     font-weight: 700;
     @media only screen and (max-aspect-ratio: 1/1) {
         font-size: 2rem;
+        @media only screen and (max-width: 700px) {
+            font-size: 1.5rem;
+            padding: 10px 0 5px 0;
+        }
+    }
+    @media only screen and (max-height: 550px) {
+        font-size: 1rem;
     }
 `;
 
@@ -29,6 +37,12 @@ const H2 = styled.h2`
     color: #FFFFFF;
     @media only screen and (max-aspect-ratio: 1/1) {
         font-size: 1rem;
+        @media only screen and (max-width: 700px) {
+            font-size: 0.75rem;
+        }
+    }
+    @media only screen and (max-height: 550px) {
+        font-size: 0.5rem;
     }
 `;
 
