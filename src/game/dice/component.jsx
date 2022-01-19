@@ -27,6 +27,7 @@ const DiceRow = styled.div`
 const Die = styled(g.Triangle)`
     aspect-ratio: 1;
     margin: 10px;
+    width: 15%;
     max-height: 12vh;
     fill: ${props => props.color === "W"
       ? "#FFFFFF"

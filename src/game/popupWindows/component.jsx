@@ -5,6 +5,8 @@ import * as Actions from '../gameContext/actions'
 import { GameContext } from '../gameContext';
 import { ArrowBoard } from './assets/arrowBoard';
 
+import { useMediaQuery } from 'react-responsive';
+
 const InstructionWrap = styled.div`
     width: 100%;
     overflow-y: scroll;
@@ -38,6 +40,8 @@ const InfoWindow = ({}) => {
 
     const [_, dispatch] = React.useContext(GameContext);
 
+    const mobile = useMediaQuery({query: '(max-width: 700px)'});
+
     return <>
         <g.Blur onClick={() => dispatch(Actions.setWindowState(""))}/> 
         <g.Window>
@@ -47,7 +51,12 @@ const InfoWindow = ({}) => {
                 </g.MenuH2>
                 <ListWrap>
                     • The goal of the game is to get all of your stones from the start (E3 for white and E1 for black) to the end. (F3 for white and F1 for black)<br/>
-                    • The current turn number is displayed in the top left, the color of the text indicates which player is up.<br/>
+                    • White moves first.<br/>
+                    {
+                        !mobile
+                        ? "• The current turn number is displayed in the top left, along with which player is up."
+                        : "• The current turn number is displayed in the menu, along with which player is up."
+                    }<br/>
                     • During each player's turn they roll the dice at the bottom of the screen.<br/>
                     • The number of black triangles you roll determines how many spaces you can move one of your stones.<br/>
                     • You can move any of your stones by clicking on them, they will move using the path drawn below.<br/>

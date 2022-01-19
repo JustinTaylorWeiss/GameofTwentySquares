@@ -7,8 +7,8 @@ import { SettingsIcon } from './assets/settingsIcon';
 import { MenuIcon } from './assets/menuIcon';
 import { Arrow } from './assets/arrow';
 
-import { useMediaQuery } from 'react-responsive'
-import MediaQuery from 'react-responsive'
+import { useMediaQuery } from 'react-responsive';
+import MediaQuery from 'react-responsive';
 
 const TurnMoveTracker = styled.div`
     grid-area: lMenuHead;
@@ -17,7 +17,7 @@ const TurnMoveTracker = styled.div`
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: ${props => props.color};
     background-color: #7851A9;
     border-bottom: 2px solid #000000;
@@ -52,6 +52,7 @@ const LogEntry = styled.div`
     }
     @media only screen and (max-width: 700px) {
         font-size: 1.5rem;
+        margin-left: 5vw;
     }
 `;
 
@@ -129,6 +130,17 @@ const HamburgerGrid = styled.div`
         "lMenu lMenu lMenu";
 `;
 
+const numberToPostFix = (n) => {
+
+    const postFixMap = ["th ", "st ", "nd ", "rd ", "th ", "th ", "th ", "th ", "th ", "th "];
+
+    return n < 10 
+        ? n + postFixMap[n]
+        : n < 20
+            ? n + postFixMap[0]
+            : n + postFixMap[n % 10]
+}
+
 const HamburgerLog = ({updateHamburgerState}) => {
 
     const [gameContextState, dispatch] = React.useContext(GameContext);
@@ -141,7 +153,9 @@ const HamburgerLog = ({updateHamburgerState}) => {
             <IconWrap>
                 <HelpIcon onClick={() => dispatch(Actions.setWindowState("Info"))}/>
             </IconWrap>  
-                Turn {gameContextState.gameState.turnNumber}
+                {gameContextState.gameState.activePlayer === "W" ? "White's " : "Black's "}
+                {numberToPostFix(gameContextState.gameState.turnNumber)} 
+                Turn
             <IconWrap>
                 <SettingsIcon onClick={() => dispatch(Actions.setWindowState("Settings"))}/>
             </IconWrap>
@@ -185,7 +199,9 @@ export const Log = ({}) => {
                     <HelpIcon onClick={() => dispatch(Actions.setWindowState("Info"))}/>
                     </IconWrap>
                 }   
-                    Turn {gameContextState.gameState.turnNumber}
+                    {gameContextState.gameState.activePlayer ? "White's " : "Black's "}
+                    {numberToPostFix(gameContextState.gameState.turnNumber)} 
+                    Turn
                 { past1x1 && <IconWrap>
                     <SettingsIcon onClick={() => dispatch(Actions.setWindowState("Settings"))}/>
                     </IconWrap>
