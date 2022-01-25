@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/GameofTwentySquares/static/css/main.ef9a22f9.chunk.css",
-    "main.js": "/GameofTwentySquares/static/js/main.9bc82e1b.chunk.js",
-    "main.js.map": "/GameofTwentySquares/static/js/main.9bc82e1b.chunk.js.map",
+    "main.js": "/GameofTwentySquares/static/js/main.5215946c.chunk.js",
+    "main.js.map": "/GameofTwentySquares/static/js/main.5215946c.chunk.js.map",
     "runtime-main.js": "/GameofTwentySquares/static/js/runtime-main.39959b4e.js",
     "runtime-main.js.map": "/GameofTwentySquares/static/js/runtime-main.39959b4e.js.map",
     "static/js/2.2934b965.chunk.js": "/GameofTwentySquares/static/js/2.2934b965.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.39959b4e.js",
     "static/js/2.2934b965.chunk.js",
     "static/css/main.ef9a22f9.chunk.css",
-    "static/js/main.9bc82e1b.chunk.js"
+    "static/js/main.5215946c.chunk.js"
   ]
 }
