@@ -37,8 +37,26 @@ const Die = styled(g.Triangle)`
 
 const DieWrap = styled.div`
     aspect-ratio: 1;
-    flex-grow: 2;
-    margin: 5% 2.5% 5% 2.5%;
+    width: 12%;
+    margin: 5% 2%;
+    @media only screen and (max-aspect-ratio: 1/1) {
+        width: auto;
+        flex-grow: 2;
+    }
+`;
+
+const RollWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    width: 8%;
+    margin-left: 2%;
+    @media only screen and (max-aspect-ratio: 1/1) {
+        width: auto;
+        flex-grow: 1;
+    }
 `;
 
 const RollButton = styled.div`
@@ -46,11 +64,12 @@ const RollButton = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-grow: 1;
     border-radius: 2px;
+    width: 100%;
+    height: 100%;
     aspect-ratio: 1;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -63,8 +82,9 @@ const RollButton = styled.div`
         cursor: pointer;
     }
     @media only screen and (max-aspect-ratio: 1/1) {
+        margin: 5% 2%;
     }
-    @media only screen and (max-width: 700px) {
+    @media only screen and (max-width: 1300px) {
         font-size: 0.75rem;
     }
 `;
@@ -86,10 +106,11 @@ export const Dice = ({}) => {
                 )
             }
             {
-                !gameContextState.gameState.rolled &&
-                <RollButton onClick={() => dispatch(Actions.rollDice())}>
-                    Roll
-                </RollButton>
+                !gameContextState.gameState.rolled && <RollWrap>
+                        <RollButton onClick={() => dispatch(Actions.rollDice())}>
+                            Roll
+                        </RollButton>
+                </RollWrap>
             }
         </DiceRow>
     );

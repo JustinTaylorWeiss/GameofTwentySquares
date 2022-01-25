@@ -97,6 +97,9 @@ const GameTileText = styled.div`
     @media only screen and (max-aspect-ratio: 1/1) {
       font-size: 1.5rem;
     }
+    @media only screen and (max-width: 1300px) {
+      font-size: 1.2rem;
+    }
     @media only screen and (max-height: 550px) {
       font-size: 0.75rem;
     }
@@ -156,73 +159,3 @@ export const Board = ({}) => {
       }
     </GameBoardGrid>
 };
-
-
-/*
-<GameBoardRow>
-              <GameBoardColumn key={`Labelcolumn`}>
-                <GameBoardRowLabel key="Label3">3</GameBoardRowLabel>
-                <GameBoardRowLabel key="Label2">2</GameBoardRowLabel>
-                <GameBoardRowLabel key="Label1">1</GameBoardRowLabel>
-                <GameBoardCornerDot/>
-              </GameBoardColumn>
-              {
-                Array(7).fill(0).map((_, rowIndex) =>
-                  <GameBoardColumn key={`column${rowIndex}`}>
-                    {
-                      Array(3).fill(0).map((_, columnIndex) => {
-                        const modifier = getTileModifierWithCoords(gameContextState, columnIndex, rowIndex) ?? "";
-                        const stones = getTileStonesWithCoords(gameContextState, columnIndex, rowIndex) ?? [];
-                        return <GameTile
-                            onClick={() => {
-                                if(stones[0] && validateMove(gameContextState, stones[0])) {
-                                    dispatch(Actions.moveStone(stones[0]))
-                                    dispatch(Actions.resetRolled())
-                                }
-                            }}
-                            key={`Tile[${columnIndex},${rowIndex}]`}
-                            modifier={modifier}
-                          >
-                            {stones.length > 0 ? <GameStone color={stones[0].charAt(0)}/> : null}
-                            <GameTileText>
-                                {stones.length > 0 ? stones.length : ""}
-                            </GameTileText>
-                          </GameTile>
-                      })
-                    }
-                    <GameBoardColumnLabel key={`${rowIndex}CLabel`}>{ rowLetterMap?.[rowIndex] ?? ""}</GameBoardColumnLabel>
-                  </GameBoardColumn>
-                )
-              }
-      </GameBoardRow>
-*/
-
-
-/*
-Array(4).fill(0).map((_, rowIndex) => <>
-            
-              Array(9).fill(0).map((_, columnIndex) => {
-                const modifier = getTileModifierWithCoords(gameContextState, columnIndex, rowIndex) ?? "";
-                const stones = getTileStonesWithCoords(gameContextState, columnIndex, rowIndex) ?? [];
-                return <GameTile
-                    onClick={() => {
-                        if(stones[0] && validateMove(gameContextState, stones[0])) {
-                            dispatch(Actions.moveStone(stones[0]))
-                            dispatch(Actions.resetRolled())
-                        }
-                    }}
-                    key={`Tile[${columnIndex},${rowIndex}]`}
-                    modifier={modifier}
-                  >
-                    {stones.length > 0 ? <GameStone color={stones[0].charAt(0)}/> : null}
-                    <GameTileText>
-                        {stones.length > 0 ? stones.length : ""}
-                    </GameTileText>
-                  </GameTile>
-              })
-            <GameBoardColumnLabel key={`${rowIndex}CLabel`}>{ rowLetterMap?.[rowIndex] ?? ""}</GameBoardColumnLabel>
-          </GameBoardColumn>
-        </>)
-      }
-    </GameBoardGrid>
-*/
